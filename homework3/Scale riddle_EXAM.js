@@ -1,6 +1,6 @@
 // 5) Scale riddle.With 8 balls EXAM[1, 1, 1, 1, 2, 1, 1, 1].One of the items will be change to two.Indexes are t be chosen at random.Use compressions only two times.
 
-let myArray = [1, 2, 1, 1, 1, 1, 1, 1];
+let myArray = [1, 1, 2, 1, 1, 1, 1, 1];
 let firstShawl = [];
 let firstShawlIndex = [];
 let secondShawl = [];
@@ -8,36 +8,34 @@ let secondShawlIndex = [];
 let noChosenOne = [];
 let noChosenOneIndex = [];
 
-const randomizeArray = (someArray) => {
-    for (let i = 0; i <= someArray.length; i++) {
-        let random = Math.floor(Math.random() * someArray.length);
-        if (firstShawl.length < 3) {
-            if (firstShawlIndex.includes(random)) {
-                i = 0;
-                continue;
-            }
-            firstShawl.push(someArray[random]);
-            firstShawlIndex.push(random);
-        } else if (secondShawl.length < 3) {
-            if (firstShawlIndex.includes(random) || secondShawlIndex.includes(random)) {
-                i = 0;
-                continue;
-            }
-            secondShawl.push(someArray[random]);
-            secondShawlIndex.push(random);
-        } else if (noChosenOne.length < 2) {
-            if (firstShawlIndex.includes(random) || secondShawlIndex.includes(random) || noChosenOneIndex.includes(random)) {
-                i = 0;
-                continue;
-            }
-            noChosenOne.push(someArray[random]);
-            noChosenOneIndex.push(random);
+// putting random 3 balls on the first shawl, 3 another on the second shawl and the 2 other to the "no chosen" box, their indexes goes to the special arrays in same way
+for (let i = 0; i <= myArray.length; i++) {
+    let random = Math.floor(Math.random() * myArray.length);
+    if (firstShawl.length < 3) {
+        if (firstShawlIndex.includes(random)) {
+            i = 0;
+            continue;
         }
+        firstShawl.push(myArray[random]);
+        firstShawlIndex.push(random);
+    } else if (secondShawl.length < 3) {
+        if (firstShawlIndex.includes(random) || secondShawlIndex.includes(random)) {
+            i = 0;
+            continue;
+        }
+        secondShawl.push(myArray[random]);
+        secondShawlIndex.push(random);
+    } else if (noChosenOne.length < 2) {
+        if (firstShawlIndex.includes(random) || secondShawlIndex.includes(random) || noChosenOneIndex.includes(random)) {
+            i = 0;
+            continue;
+        }
+        noChosenOne.push(myArray[random]);
+        noChosenOneIndex.push(random);
     }
-    return;
 }
-randomizeArray(myArray);
 
+// firstable check if all balls on shawls have same wage, if true, throw away balls from shawl and put random ball from "no chosen" box on first shawl and another ball from box on the second shawl, then go to final weighting, their indexes goes to the special arrays in same way
 if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) === (secondShawl[0] + secondShawl[1] + secondShawl[2])) {
     firstShawl = [];
     firstShawlIndex = [];
@@ -57,7 +55,10 @@ if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) === (secondShawl[0] + second
             noChosenOneIndex.splice(random, 1);
         }
     }
-} else if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) > (secondShawl[0] + secondShawl[1] + secondShawl[2])) {
+}
+
+// if balls on the first shawl are heavier than the balls on the second shawl, throw away balls from second shawl, put 1 random ball from first shawl to the second shawl and 1 random ball to the "no chosen" box, then go to the final weighting, their indexes goes to the special arrays in same way
+else if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) > (secondShawl[0] + secondShawl[1] + secondShawl[2])) {
     secondShawl = [];
     secondShawlIndex = [];
     noChosenOne = [];
@@ -76,7 +77,10 @@ if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) === (secondShawl[0] + second
             firstShawlIndex.splice(random, 1);
         }
     }
-} else {
+}
+
+// if balls on the second shawl are heavier than the balls on the first shawl, throw away balls from firs shawl, put 1 random ball from second shawl to the first shawl and 1 random ball to the "no chosen" box, then go to the final weighting, their indexes goes to the special arrays in same way
+else {
     firstShawl = [];
     firstShawlIndex = [];
     noChosenOne = [];
@@ -96,10 +100,16 @@ if ((firstShawl[0] + firstShawl[1] + firstShawl[2]) === (secondShawl[0] + second
         }
     }
 }
+
+// final weighting shows on what index is the heaviest ball
 if (firstShawl[0] > secondShawl[0]) {
     console.log(firstShawlIndex[0]);
-} else if (firstShawl[0] < secondShawl[0]) {
+}
+
+else if (firstShawl[0] < secondShawl[0]) {
     console.log(secondShawlIndex[0]);
-} else {
+}
+
+else {
     console.log(noChosenOneIndex[0]);
 }
