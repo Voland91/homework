@@ -101,7 +101,7 @@ else {
     }
 }
 
-// final weighting shows on what index is the heaviest ball
+// second weighting shows on what index is the heaviest ball
 if (firstShawl[0] > secondShawl[0]) {
     console.log(firstShawlIndex[0]);
 }
