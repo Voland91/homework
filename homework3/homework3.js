@@ -1,6 +1,6 @@
 // 1) Create an iffe that returns an object with fields: function setValue(), function showValue() and function reverseValue(). Calling functions either logs the value or reverse it in an object. If value was not provided yet or is empty showValue function is to return information about that. Value can be type string or number. reverseValue():  If number do (*(-1)), if string reverse it.  Closure pattern.
 
-let myValue = null;
+let myValue = "undefined";
 
 let iffe = (function () {
 
@@ -13,10 +13,10 @@ let iffe = (function () {
             return myValue;
         }
         else if (myValue === undefined || myValue === null) {
-            return 'Value is incorrect';
+            return 'value is incorrect';
         }
         else {
-            return 'Value is not provided yet';
+            return 'value is not provided yet';
         }
     }
 
@@ -38,4 +38,3 @@ let iffe = (function () {
         reverseValue: reverseValue(),
     });
 })();
-
