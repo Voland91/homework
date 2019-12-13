@@ -5,7 +5,7 @@
 //     Ervin Howell
 //     lat -43.9509
 //     lng -34.4618
-const request = require('request');
+// const request = require('request');
 // const url = 'https://jsonplaceholder.typicode.com/users/2';
 
 // request(url, (error, response, body) => {
@@ -41,8 +41,8 @@ const request = require('request');
 // lng -34.4618
 // node app.js --id=20
 
-const argv = require('yargs').argv;
-const userId = argv.id
+// const argv = require('yargs').argv;
+// const userId = argv.id
 // const url = `https://jsonplaceholder.typicode.com/users/${userId}`;
 
 
@@ -132,8 +132,8 @@ getUser(userId, (user) => {
     console.log('lat:', user.address.geo.lat);
     console.log('lng:', user.address.geo.lng);
     getWeather(user.address.geo.lat, user.address.geo.lng, (weather) => {
-        let celcius = (weather.main.temp - 32) / 1.8;
-        console.log(weather.main.temp, 'F, ', celcius, 'C');
+        let celcius = (weather.main.temp - 273.15);
+        console.log(weather.main.temp, 'K, ', celcius, 'C');
         let data = {
             name: user.name,
             temperature: weather.main.temp
