@@ -228,7 +228,7 @@ const id = argv.id;
 
 const getUser = (userId, callback) => {
     axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
-        .then(response => callback(response.data))
+        .then((response) => callback(response.data))
         .catch(error => console.log('user not found! :(', error))
 }
 
