@@ -10,7 +10,12 @@ const getYourRandomHandler = () => {
         };
         let yourQuotes = JSON.parse(data);
         let random = Math.floor(Math.random() * yourQuotes.quotes.length);
+        yourQuotes.quotes[random].counter += 1;
+        fs.writeFile("./quotes.json", JSON.stringify(yourQuotes), "utf-8", error => {
+            if (error) console.log(error.message);
+        });
         console.log(prettyjson.render(yourQuotes.quotes[random], { numberColor: 'white', keysColor: 'yellow', dashColor: 'magenta' }));
+        console.log(`This Quote was displayed ${yourQuotes.quotes[random].counter} times`);
     }
     )
 };

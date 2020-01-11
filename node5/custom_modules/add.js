@@ -8,6 +8,7 @@ class Quote {
       (this.author = author),
       (this.id = id),
       (this.group = group);
+    (this.counter = 0)
   }
 }
 const addQuote = args => {
